@@ -20,7 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51f05284-b91e-4567-b445-aef8b718b7e3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/KimSMDevelope.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/KimSMDevelope.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FLICK/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FLICK/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FLICK/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FLICK/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/HanJSDevelope.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/HanJSDevelope.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/solhwi.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/solhwi.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Note.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Note.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/NoteGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/NoteGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +46,7 @@
         <option value="$PROJECT_DIR$/Assets/Develope-KimSM/SpawnNote.cs" />
         <option value="$PROJECT_DIR$/Assets/Develope-KimSM/HighSpeed.cs" />
         <option value="$PROJECT_DIR$/Assets/Develope-KimSM/NoteTemp.cs" />
+        <option value="$PROJECT_DIR$/Assets/Script/Note.cs" />
       </list>
     </option>
   </component>
@@ -63,7 +71,8 @@
       <option name="presentableId" value="Default" />
       <updated>1603461563862</updated>
       <workItem from="1603461574393" duration="2219000" />
-      <workItem from="1603466404415" duration="925000" />
+      <workItem from="1603466404415" duration="1853000" />
+      <workItem from="1603469683958" duration="1062000" />
     </task>
     <servers />
   </component>
