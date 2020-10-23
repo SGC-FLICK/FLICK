@@ -51,10 +51,7 @@ public class pointer : MonoBehaviour
          if (hit2D.collider != null) //라인이 클릭되면
          { 
              Debug.Log("line click");
-
-             toggle.isOn = true; // 라인에 노트가 들어왔는 지 검사하는 단계
-
-             // Destroy(hit2D.collider.gameObject); //노트파괴
+             toggle.isOn = true; // 라인에 노트가 들어왔는 지 검사하는 단계로 진입
          }
     }
 }
