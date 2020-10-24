@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class line : MonoBehaviour
 public class Line : MonoBehaviour
 {
     private double now = 0;
