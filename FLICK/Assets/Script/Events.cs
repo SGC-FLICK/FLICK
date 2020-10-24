@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class NoteDecisionEvent : GameEvent
 {
-    public DecisionType decisionType = DecisionType.Miss;
     public Note note = null;
 
-    public NoteDecisionEvent(DecisionType type, Note note)
+    public NoteDecisionEvent(Note note)
     {
-        this.decisionType = type;
         this.note = note;
     }
 }

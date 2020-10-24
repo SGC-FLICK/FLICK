@@ -11,7 +11,9 @@
           <e p="ComboEffect.cs" t="Include" />
           <e p="ComboText.cs" t="Include" />
           <e p="HighSpeed.cs" t="Include" />
+          <e p="MainTitle.cs" t="Include" />
           <e p="NoteTemp.cs" t="Include" />
+          <e p="Score.cs" t="Include" />
           <e p="SongProgress.cs" t="Include" />
         </e>
         <e p="Script" t="Include">

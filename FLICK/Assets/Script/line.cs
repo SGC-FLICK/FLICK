@@ -5,81 +5,96 @@ using UnityEngine.UI;
 
 public class line : MonoBehaviour
 {
-    [SerializeField] public Toggle toggle;
-    private Note note;
     private double now = 0;
-    private double noteTiming;
 
-    private int state;
-    private bool isNotCheckState = false;
-    private bool isCollision = false;
-    void Start()
-    {
-        note = GetComponent<Note>();
-        //noteTiming = note.willPlayTiming;
-    }
+    //private int state = 3;
+    private bool isLongNote = false;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(!isCollision) //토글은 켜져있는데 충돌상태가 아닌 경우엔 토글을 꺼야함
-        {
-            toggle.isOn = false;
-        }
-    }
+    public bool isOn = false;
+
     void OnTriggerEnter2D(Collider2D other)
     {
-        isCollision = true;
-        isNotCheckState = true;
+        Note note = other.gameObject.GetComponent<Note>();
+        note.isStateChecked = false;
     }
+
     void OnTriggerExit2D(Collider2D other)
     {
-        Destroy(other.gameObject); // 노트 파괴
-        ComboEffect.Instance.GetJudgement(state);
-        ComboText.Instance.GetNoteExactly();
-        isCollision = false;
-        isNotCheckState= false;
+        Note note = other.gameObject.GetComponent<Note>();
+        if (note.noteType == Note.NoteType.NORMAL)
+        {
+            if (note.isStateChecked == false)
+            {
+                note.scoreType = Note.ScoreType.MISS;
+                ScoreProcess(note);    // 점수 처리
+                ComboText.Instance.GetMiss();
+                note.Eliminate();      //노트 파괴
+            }
+        }
+
+        if (note.noteType == Note.NoteType.LONG)
+        {
+            if (note.isStateChecked == false)
+            {
+                note.scoreType = Note.ScoreType.MISS;
+                ScoreProcess(note);    // 점수 처리
+                ComboText.Instance.GetMiss();
+                isLongNote = false;    // LongNote 탈출 시 처리
+                note.Eliminate();      // 노트 파괴
+            }
+        }
     }
+
+    void ScoreProcess(Note note)
+    {
+        ComboEffect.Instance.GetJudgement((int)note.scoreType); // 현재 state에 맞는 점수 처리
+        if(note.scoreType != Note.ScoreType.BAD) 
+        {
+            ComboText.Instance.GetNoteExactly();
+            //if(!isLongNote && !isOn) note.scoreType = Note.ScoreType.BAD; 
+            // LongNote인 경우엔 직전 state 유지 단, 누르고 있는 경우이다.
+        }
+        else
+            ComboText.Instance.GetMiss();
+    }
+
     void OnTriggerStay2D(Collider2D other) 
     {
-
-        if(toggle.isOn) //라인을 클릭했는데 노트와 충돌 중인 경우 진입 
+        Note note = other.gameObject.GetComponent<Note>();
+        if (isOn) //라인을 클릭했는데 노트와 충돌 중인 경우 진입 
         {
-            noteTiming = other.gameObject.GetComponent<Note>().willPlayTiming;
-        
-            if(other.gameObject.layer == LayerMask.NameToLayer("Note")) // 노트와 라인이 충돌 중엔 프레임 단위로 반복  
-            {  
-                now = HighSpeed.Instance.CurrentTime; // 클릭한 시간
-                if(noteTiming - 0.35 <= now && now <= noteTiming + 0.35) state = 0; // perfect
-                else if(noteTiming - 0.7 <= now && now <= noteTiming + 0.7) state = 1; // good
-                else if(noteTiming - 1 <= now && now <= noteTiming + 1) state = 2; // bad
-            }
+            var noteTiming = note.willPlayTiming;
+            now = HighSpeed.Instance.CurrentTime; // 클릭한 시간
 
-            else if(other.gameObject.layer == LayerMask.NameToLayer("LongNote")) // 롱노트와 라인임 충돌 중엔 프레임 단위로 반복
+            if (note.isStateChecked == false) // state 판정
             {
-                now = HighSpeed.Instance.CurrentTime; // 클릭한 시간
-                if(isNotCheckState) // state 판정
+                note.isStateChecked = true;
+                if (noteTiming - 0.05 <= now && now <= noteTiming + 0.05) // perfect
                 {
-                    if(noteTiming - 0.35 <= now && now <= noteTiming + 0.35) state = 0; // perfect
-                    else if(noteTiming - 0.7 <= now && now <= noteTiming + 0.7) state = 1; // good
-                    else if(noteTiming - 1 <= now && now <= noteTiming + 1) state = 2; // bad
-                    isNotCheckState = false;
+                    Debug.Log("노트 타이밍 : " + noteTiming + "노래 : " + now);
+                    note.scoreType = Note.ScoreType.PERFECT;
+                    ScoreProcess(note);
+                    note.Eliminate();
                 }
-                else
+                else if (noteTiming - 0.1 <= now && now <= noteTiming + 0.1) // good
                 {
-                    ComboEffect.Instance.GetJudgement(state);
-                    ComboText.Instance.GetNoteExactly();
-
-                    Note note =  other.gameObject.GetComponent<Note>();
+                    note.scoreType = Note.ScoreType.GOOD;
+                    ScoreProcess(note);
+                    note.Eliminate();
+                }
+                else if (noteTiming - 0.2 <= now && now <= noteTiming + 0.2)    // bad
+                {
                     if (note != null)
                     {
-                        EventManager.instance.Raise(new NoteDecisionEvent((DecisionType)state, note));
+                        EventManager.instance.Raise(new NoteDecisionEvent(note));
                     }
+                    note.scoreType = Note.ScoreType.BAD;
+                    ScoreProcess(note);
+                    note.Eliminate();
                 }
+
             }
-    
         }
-    
     }
     
 }
