@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class line : MonoBehaviour
+public class Line : MonoBehaviour
 {
     private double now = 0;
 
@@ -71,7 +71,7 @@ public class line : MonoBehaviour
                 note.isStateChecked = true;
                 if (noteTiming - 0.05 <= now && now <= noteTiming + 0.05) // perfect
                 {
-                    Debug.Log("노트 타이밍 : " + noteTiming + "노래 : " + now);
+                    //Debug.Log("노트 타이밍 : " + noteTiming + "노래 : " + now);
                     note.scoreType = Note.ScoreType.PERFECT;
                     ScoreProcess(note);
                     note.Eliminate();

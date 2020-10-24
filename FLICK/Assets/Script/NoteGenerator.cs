@@ -9,10 +9,8 @@ public class NoteGenerator : MonoBehaviour
     public GameObject spawnedPrefab;
     public GameObject[] spawnPoint;
 
-    public float musicStartDelay;             //첫 음악 시작까지 딜레이
-    public float noteStartDelay;              //첫 노트 생성까지 딜레이
     public float musicPlayedTime = 0.00f;     //노래 플레이 후 경과 시간
-    public float arriveSpentTime = 2.0f;      //노트가 지점까지 가는데에 걸리는 시간
+    public float arriveSpentTime;             //노트가 지점까지 가는데에 걸리는 시간
     float tick = 0.03f;
     double count;                             //디버깅 편의상, 나중엔 private로 바꾸기
 
@@ -33,8 +31,8 @@ public class NoteGenerator : MonoBehaviour
 
     void Start()
     {
-        Invoke("PlayMusic", musicStartDelay);
-        InvokeRepeating("Timer", noteStartDelay, tick);
+        Invoke("PlayMusic", csv.musicStartDelay);
+        InvokeRepeating("Timer", csv.noteStartDelay, tick);
         //2초 뒤에, 0.03초 간격으로 timer 메서드 호출
         //노래 시작 타이밍을 조절해서 싱크 맞출 수 있음
     }
@@ -56,7 +54,7 @@ public class NoteGenerator : MonoBehaviour
     {
         count += csv.CountperSec * tick;
         musicPlayedTime += tick;
-        if (count > (int)csv.note.Peek())
+        if (count > csv.note.Peek().startTime)
         {
             GenerateNote(musicPlayedTime);
         }
@@ -69,7 +67,7 @@ public class NoteGenerator : MonoBehaviour
         spawnedPrefab = Instantiate(notePrefab, spawnPoint[rand].transform);
         spawnedPrefab.GetComponent<Note>().spawnedTiming = musicPlayedTime;
         spawnedPrefab.GetComponent<Note>().willPlayTiming = musicPlayedTime + arriveSpentTime;
-        spawnedPrefab.GetComponent<Note>().noteType = Note.NoteType.NORMAL; //기본노트
+        spawnedPrefab.GetComponent<Note>().noteType = csv.note.Peek().noteType;
         //spawnedTiming, willPlayTiming은 note 프리팹에 저장되는 변수
         //spawnedTiming은 음악 몇초 째에 생성되었는지, willPlayTiming은 몇초 째에 연주되어야 하는지를 의미
         //arriveSpentTime은 생성 후 라인까지 걸리는 시간, 

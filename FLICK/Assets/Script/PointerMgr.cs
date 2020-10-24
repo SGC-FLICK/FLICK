@@ -42,7 +42,7 @@ public class PointerMgr : MonoBehaviour
         {
             if (hit.transform.gameObject.tag == "Tile")
             {
-                hit.transform.GetComponent<line>().isOn = true;
+                hit.transform.GetComponent<Line>().isOn = true;
             }
         }
     }
@@ -56,7 +56,7 @@ public class PointerMgr : MonoBehaviour
         {
             if (hit.transform.gameObject.tag == "Tile")
             {
-                hit.transform.GetComponent<line>().isOn = false;
+                hit.transform.GetComponent<Line>().isOn = false;
             }
         }
     }

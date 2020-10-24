@@ -180,9 +180,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6126b8a231cb8340bd68a9a4ec22fc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentSong: {fileID: 11400000, guid: 1fb9c8cebdaac904fa78d52fd7253564, type: 2}
   bpm: 0
-  beat: 96
+  beat: 0
   CountperSec: 0
+  musicStartDelay: 0
+  noteStartDelay: 0
 --- !u!4 &312327936
 Transform:
   m_ObjectHideFlags: 0
@@ -910,8 +913,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  musicStartDelay: 2
-  noteStartDelay: 0
   musicPlayedTime: 0
   arriveSpentTime: 2.64
 --- !u!4 &1370418641

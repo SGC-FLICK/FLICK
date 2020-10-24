@@ -21,7 +21,7 @@ public class ComboText : MonoBehaviour
     public void GetNoteExactly()
     {
         comBoText.text = $"{++nowCombo}\nCombo";
-        Debug.Log($"nowCombo = {nowCombo}");
+        //Debug.Log($"nowCombo = {nowCombo}");
     }
 
     // Miss 판정이 났을 때, ComboText.Instance.GetMiss(); 를 써주시면 콤보 UI에서 자동으로 0으로 바뀔겁니다.
