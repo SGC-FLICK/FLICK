@@ -48,14 +48,29 @@ public class Line : MonoBehaviour
     void ScoreProcess(Note note)
     {
         ComboEffect.Instance.GetJudgement((int)note.scoreType); // 현재 state에 맞는 점수 처리
-        if(note.scoreType != Note.ScoreType.BAD) 
+        if(note.scoreType != Note.ScoreType.MISS)
         {
+            switch (note.scoreType)
+            {
+                case Note.ScoreType.PERFECT:
+                    Score.Instance.AddScore(300);
+                    break;
+                case Note.ScoreType.GOOD:
+                    Score.Instance.AddScore(200);
+                    break;
+                case Note.ScoreType.BAD:
+                    Score.Instance.AddScore(100);
+                    break;
+            }
+
             ComboText.Instance.GetNoteExactly();
             //if(!isLongNote && !isOn) note.scoreType = Note.ScoreType.BAD; 
             // LongNote인 경우엔 직전 state 유지 단, 누르고 있는 경우이다.
         }
         else
+        {
             ComboText.Instance.GetMiss();
+        }
     }
 
     void OnTriggerStay2D(Collider2D other) 

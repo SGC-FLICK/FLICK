@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ca2f140d73e274388da11bb1d46aa6, type: 3}
   m_Name: Faded
   m_EditorClassIdentifier: 
-  MusicName: Faded_Edit
+  MusicName: Faded_LongTest
   clip: {fileID: 8300000, guid: 04a6c08564aded747992cb7cafd0bfe3, type: 3}
   bpm: 89
   beat: 192

@@ -16,12 +16,22 @@
           <e p="Score.cs" t="Include" />
           <e p="SongProgress.cs" t="Include" />
         </e>
+        <e p="Musics" t="Include">
+          <e p="Song.cs" t="Include" />
+        </e>
         <e p="Script" t="Include">
+          <e p="Events.cs" t="Include" />
           <e p="line.cs" t="Include" />
           <e p="Note.cs" t="Include" />
+          <e p="NoteDecisionEffectGenerator.cs" t="Include" />
           <e p="NoteGenerator.cs" t="Include" />
           <e p="PointerMgr.cs" t="Include" />
           <e p="ReadCSV.cs" t="Include" />
+          <e p="Utile" t="Include">
+            <e p="EventManager.cs" t="Include" />
+            <e p="MonoSingleton.cs" t="Include" />
+            <e p="SelfDestroyer.cs" t="Include" />
+          </e>
         </e>
       </e>
       <e p="FLICK.sln" t="IncludeFlat" />

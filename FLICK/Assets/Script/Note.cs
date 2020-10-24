@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Note : MonoBehaviour
 {
+    public Sprite[] sprites;
     public float speed = 3.0f;      //내려오는 속도
     public int trackNum;            //몇 번 트랙에 놓여있는지
     public bool isStateChecked;     //판정 받았는지
@@ -18,7 +19,8 @@ public class Note : MonoBehaviour
     {
         NORMAL,
         LONG,
-        BOUNCE
+        BOUNCE_UP,
+        BOUNCE_DOWN
     }
 
     public enum ScoreType
@@ -34,9 +36,22 @@ public class Note : MonoBehaviour
 
     void Start()
     {
+        SetSprite();
         InvokeRepeating("Timer", 0, 0.03f);
     }
-    
+
+    void SetSprite()
+    {
+        if (noteType == NoteType.NORMAL)
+            GetComponent<SpriteRenderer>().sprite = sprites[0];
+        else if (noteType == NoteType.LONG)
+            GetComponent<SpriteRenderer>().sprite = sprites[1];
+        else if (noteType == NoteType.BOUNCE_UP)
+            GetComponent<SpriteRenderer>().sprite = sprites[2];
+        else if (noteType == NoteType.BOUNCE_DOWN)
+            GetComponent<SpriteRenderer>().sprite = sprites[3];
+    }
+
     void Update()
     {
         //var position = transform.position;
@@ -55,11 +70,6 @@ public class Note : MonoBehaviour
             CancelInvoke("Timer");
             //Eliminate();
         }
-    }
-
-    public void CheckScore()
-    {
-
     }
 
     public void Eliminate()

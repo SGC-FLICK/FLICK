@@ -36,6 +36,7 @@ public class ReadCSV : MonoBehaviour
         //상대경로 지정
         StreamReader strReader = new StreamReader(CSVdir);
         bool endOfFile = false;
+        int previousData = -1;
         string currentTitle = "";
         while (!endOfFile)
         {
@@ -62,34 +63,37 @@ public class ReadCSV : MonoBehaviour
             {
                 currentTitle = data_values[3].ToString();
             }
+
             if (data_values[2] == " Note_on_c" && data_values[5] != " 0")
             {
                 int data_values_toInt;
                 data_values_toInt = Convert.ToInt32(data_values[1]);
-                note.Enqueue(CreateNoteData(data_values_toInt, 0, Note.NoteType.NORMAL));
+
+                if (previousData == -1) //밤새우면서 짠 코드라 나중에 수정...필요..
+                {
+                    previousData = data_values_toInt;
+                    continue;
+                }
+
+                if (data_values_toInt - previousData >= beat * 2) //현재 음표가 2분음표 보다 길면
+                {
+                     note.Enqueue(CreateNoteData(previousData, data_values_toInt, Note.NoteType.LONG));
+                }
+                else
+                {
+                     note.Enqueue(CreateNoteData(previousData, 0, Note.NoteType.NORMAL));
+                }
+
+                previousData = data_values_toInt;
             }
+
+
             //if (currentTitle == " \"track_1\"" && data_values[2] == " Note_on_c")
             //{
             //    int data_values_toInt;
             //    data_values_toInt = Convert.ToInt32(data_values[1]);
             //    note[0].Enqueue(CreateNoteData(data_values_toInt, 1));
             //    Debug.Log("노트1 생성");
-            //}
-
-            //if (currentTitle == " \"track_2\"" && data_values[2] == " Note_on_c")
-            //{
-            //    int data_values_toInt;
-            //    data_values_toInt = Convert.ToInt32(data_values[1]);
-            //    note[1].Enqueue(CreateNoteData(data_values_toInt, 2));
-            //    Debug.Log("노트2 생성");
-            //}
-
-            //if (currentTitle == " \"track_3\"" && data_values[2] == " Note_on_c")
-            //{
-            //    int data_values_toInt;
-            //    data_values_toInt = Convert.ToInt32(data_values[1]);
-            //    note[2].Enqueue(CreateNoteData(data_values_toInt, 3));
-            //    Debug.Log("노트3 생성");
             //}
         }
         CountperSec = bpm * beat / 60;
