@@ -9,6 +9,8 @@ public class line : MonoBehaviour
     private Note note;
     private double now = 0;
     private double noteTiming;
+
+    private bool isCollision = false;
     void Start()
     {
         note = GetComponent<Note>();
@@ -20,13 +22,11 @@ public class line : MonoBehaviour
     {
 
     }
-
-    void OnCollisionStay2D(Collision2D other) { 
+    void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.layer == LayerMask.NameToLayer("Note")){ // 노트와 라인이 충돌 중엔 프레임 단위로 반복
 
-            noteTiming = other.collider.gameObject.GetComponent<Note>().willPlayTiming;
-            //
-            
+            noteTiming = other.gameObject.GetComponent<Note>().willPlayTiming;
+                
             if(toggle.isOn) //라인이 클릭되어있는 상태에서 충돌 중인 경우 
             {
                 now = HighSpeed.Instance.CurrentTime; //파괴된 시간을 기록해서 now에 저장
@@ -39,12 +39,12 @@ public class line : MonoBehaviour
                     Debug.Log("perfect!");
                     ComboEffect.Instance.GetJudgement(0);
                 } 
-                else if(noteTiming - 0.6 <= now && now <= noteTiming + 0.6)
+                else if(noteTiming - 0.7 <= now && now <= noteTiming + 0.7)
                 {
                     Debug.Log("good!");
                     ComboEffect.Instance.GetJudgement(1);
                 }
-                else //bad만 나옴 생각보다 now와 noteTiming의 차이가 큼
+                else if(noteTiming - 1 <= now && now <= noteTiming + 1) //bad만 나옴 생각보다 now와 noteTiming의 차이가 큼
                 {
                     Debug.Log(noteTiming);
                     Debug.Log(now);
@@ -56,14 +56,4 @@ public class line : MonoBehaviour
             }
         }
     }
-
-    void OnCollisionExit2D(Collision2D other) //노트가 라인을 빠져나가면
-    {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Note"))
-        {
-            Debug.Log("miss");
-            ComboEffect.Instance.GetJudgement(3);
-            ComboText.Instance.GetMiss();
-        }
-    } 
 }

@@ -31,7 +31,7 @@ public class Note : MonoBehaviour
         needArriveTime += 0.03f;
         if (gameObject.transform.position.y < -3.0f) //3.0f는 Line 오브젝트가 있는 y좌표
         {
-            Debug.Log("생성부터 소멸까지 " + needArriveTime + "초 걸림");
+            //Debug.Log("생성부터 소멸까지 " + needArriveTime + "초 걸림");
             CancelInvoke("Timer");
         }
     }
