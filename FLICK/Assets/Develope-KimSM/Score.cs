@@ -1,18 +1,41 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public static Score Instance;
+    public Sprite[] Numbers;
+    public Image[] Scores;
+
+    private int nowScore;
+
     void Start()
     {
-        
+        nowScore = 0;
+        Instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void NowScoreToString()
     {
-        
+        var str = nowScore.ToString();
+        int nowLength = str.Length;
+        for (int i = 0; i < 7 - nowLength; i++)
+        {
+            str = "0" + str;
+        }
+
+        for (int i = 0; i < str.Length; i++)
+        {
+            Scores[i].sprite = Numbers[int.Parse(str[i].ToString())];
+        }
+    }
+
+    public void AddScore(int score)
+    {
+        nowScore += score;
+        NowScoreToString();
     }
 }
