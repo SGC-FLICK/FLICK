@@ -8,7 +8,6 @@ public class pointer : MonoBehaviour
     
     public bool isMouseDown = false;
     public bool isDragged = false;
-    [SerializeField] public Toggle toggle;
    
     void Start()
     {
@@ -45,13 +44,13 @@ public class pointer : MonoBehaviour
                 Camera.main.ScreenPointToRay(Input.mousePosition).origin,
                 Camera.main.ScreenPointToRay(Input.mousePosition).direction,
                 Mathf.Infinity,
-                LayerMask.GetMask("line"));
+                LayerMask.GetMask("Line"));
         // target 클릭 시 hit2D에 담김
 
          if (hit2D.collider != null) //라인이 클릭되면
          { 
              Debug.Log("line click");
-             toggle.isOn = true; // 라인에 노트가 들어왔는 지 검사하는 단계로 진입
+             hit2D.collider.gameObject.GetComponent<Toggle>().isOn = true; // 라인에 노트가 들어왔는 지 검사하는 단계로 진입
          }
     }
 }

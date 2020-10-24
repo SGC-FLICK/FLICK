@@ -12,7 +12,7 @@ public class line : MonoBehaviour
     void Start()
     {
         note = GetComponent<Note>();
-        noteTiming = note.willPlayTiming;
+        //noteTiming = note.willPlayTiming;
     }
 
     // Update is called once per frame
@@ -22,24 +22,30 @@ public class line : MonoBehaviour
     }
 
     void OnCollisionStay2D(Collision2D other) { 
-        if(other.gameObject.layer == LayerMask.NameToLayer("note")){ // 노트와 라인이 충돌 중에
-            if(toggle.isOn) //라인이 클릭되면
+        if(other.gameObject.layer == LayerMask.NameToLayer("Note")){ // 노트와 라인이 충돌 중엔 프레임 단위로 반복
+
+            noteTiming = other.collider.gameObject.GetComponent<Note>().willPlayTiming;
+            //
+            
+            if(toggle.isOn) //라인이 클릭되어있는 상태에서 충돌 중인 경우 
              {
-                now = HighSpeed.Instance.CurrentTime;
+                now = HighSpeed.Instance.CurrentTime; //파괴된 시간을 기록해서 now에 저장
                 toggle.isOn = false; 
-                Destroy(other.gameObject); //노트 파괴
-                //파괴된 시간을 기록해서 now에 저장
+                Destroy(other.gameObject); // 노트 파괴
                 
-                if(noteTiming - 0.04  <= now && now <= noteTiming + 0.04) //노트 타이밍 +- 0.04이면 퍼펙트
+                
+                if(noteTiming - 0.35 <= now && now <= noteTiming + 0.35) //노트 타이밍 +- 0.04이면 퍼펙트
                 {
                     Debug.Log("perfect!");
                 } 
-                else if(noteTiming - 0.12 <= now && now <= noteTiming + 0.12)
+                else if(noteTiming - 0.6 <= now && now <= noteTiming + 0.6)
                 {
                     Debug.Log("good!");
                 }
-                else
+                else //bad만 나옴 생각보다 now와 noteTiming의 차이가 큼
                 {
+                    Debug.Log(noteTiming);
+                    Debug.Log(now);
                     Debug.Log("bad!");
                 }
                 // queue[0]처리하기
@@ -49,7 +55,7 @@ public class line : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D other) //노트가 라인을 빠져나가면
     {
-        if(other.gameObject.layer == LayerMask.NameToLayer("note"))
+        if(other.gameObject.layer == LayerMask.NameToLayer("Note"))
         {
             Debug.Log("miss");
         }
