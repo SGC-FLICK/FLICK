@@ -19,17 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="51f05284-b91e-4567-b445-aef8b718b7e3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FLICK/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FLICK/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FLICK/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FLICK/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Develope-KimSM/Score.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Develope-KimSM/Score.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Musics/Faded.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Musics/Faded.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Note.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Note.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/UITest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/UITest.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Note.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Note.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/ReadCSV.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/ReadCSV.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprite/SB_Resource/0001_FLICK.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprite/SB_Resource/0001_FLICK.png" afterDir="false" />
-    </list>
+    <list default="true" id="51f05284-b91e-4567-b445-aef8b718b7e3" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,8 +47,8 @@
         <option value="$PROJECT_DIR$/Assets/Script/line.cs" />
         <option value="$PROJECT_DIR$/Assets/Script/Note.cs" />
         <option value="$PROJECT_DIR$/Assets/Develope-KimSM/MainTitle.cs" />
-        <option value="$PROJECT_DIR$/Assets/Develope-KimSM/Score.cs" />
         <option value="$PROJECT_DIR$/Assets/Script/Line.cs" />
+        <option value="$PROJECT_DIR$/Assets/Develope-KimSM/Score.cs" />
       </list>
     </option>
   </component>
@@ -86,7 +76,7 @@
       <workItem from="1603466404415" duration="1853000" />
       <workItem from="1603469683958" duration="1062000" />
       <workItem from="1603471246778" duration="17924000" />
-      <workItem from="1603564328190" duration="2819000" />
+      <workItem from="1603564328190" duration="3472000" />
     </task>
     <servers />
   </component>
