@@ -69,6 +69,12 @@ public class line : MonoBehaviour
                 {
                     ComboEffect.Instance.GetJudgement(state);
                     ComboText.Instance.GetNoteExactly();
+
+                    Note note =  other.gameObject.GetComponent<Note>();
+                    if (note != null)
+                    {
+                        EventManager.instance.Raise(new NoteDecisionEvent((DecisionType)state, note));
+                    }
                 }
             }
     
