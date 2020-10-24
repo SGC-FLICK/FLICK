@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class NoteDecisionEffectGenerator : MonoBehaviour
 {
-    [SerializeField] private GameObject _effect = null;
+    [SerializeField] private GameObject _noteEffect = null;
+    [SerializeField] private GameObject _hitEffect = null;
     [SerializeField] private int _createCount = 0;
     [SerializeField] private GameObject _decisionLine = null;
 
@@ -24,7 +25,8 @@ public class NoteDecisionEffectGenerator : MonoBehaviour
     {
         for (int i = 0; i < _createCount; i++)
         {
-            Instantiate(_effect, new Vector3(e.note.transform.position.x, _decisionLine.transform.position.y), Quaternion.identity);
+            Instantiate(_noteEffect, new Vector3(e.note.transform.position.x, _decisionLine.transform.position.y), Quaternion.identity);
+            Instantiate(_hitEffect, new Vector3(e.note.transform.position.x, _decisionLine.transform.position.y), Quaternion.identity);
         }
     }
 }
