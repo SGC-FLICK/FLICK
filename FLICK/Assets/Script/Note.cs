@@ -33,11 +33,15 @@ public class Note : MonoBehaviour
         {
             //Debug.Log("생성부터 소멸까지 " + needArriveTime + "초 걸림");
             CancelInvoke("Timer");
+            Eliminate();
         }
     }
 
     public void Eliminate()
     {
         Destroy(gameObject);
+        Debug.Log("miss");
+        ComboEffect.Instance.GetJudgement(3);
+        ComboText.Instance.GetMiss();
     }
 }

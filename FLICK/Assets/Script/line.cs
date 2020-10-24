@@ -10,6 +10,8 @@ public class line : MonoBehaviour
     private double now = 0;
     private double noteTiming;
 
+    private int state;
+    private bool isNotCheckState = false;
     private bool isCollision = false;
     void Start()
     {
@@ -20,40 +22,58 @@ public class line : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-    }
-    void OnTriggerStay2D(Collider2D other) {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Note")){ // 노트와 라인이 충돌 중엔 프레임 단위로 반복
-
-            noteTiming = other.gameObject.GetComponent<Note>().willPlayTiming;
-                
-            if(toggle.isOn) //라인이 클릭되어있는 상태에서 충돌 중인 경우 
-            {
-                now = HighSpeed.Instance.CurrentTime; //파괴된 시간을 기록해서 now에 저장
-                toggle.isOn = false; 
-                Destroy(other.gameObject); // 노트 파괴
-                
-                
-                if(noteTiming - 0.35 <= now && now <= noteTiming + 0.35) //노트 타이밍 +- 0.04이면 퍼펙트
-                {
-                    Debug.Log("perfect!");
-                    ComboEffect.Instance.GetJudgement(0);
-                } 
-                else if(noteTiming - 0.7 <= now && now <= noteTiming + 0.7)
-                {
-                    Debug.Log("good!");
-                    ComboEffect.Instance.GetJudgement(1);
-                }
-                else if(noteTiming - 1 <= now && now <= noteTiming + 1) //bad만 나옴 생각보다 now와 noteTiming의 차이가 큼
-                {
-                    Debug.Log(noteTiming);
-                    Debug.Log(now);
-                    Debug.Log("bad!");
-                    ComboEffect.Instance.GetJudgement(2);
-                }
-                ComboText.Instance.GetNoteExactly();
-                // queue[0]처리하기
-            }
+        if(!isCollision) //토글은 켜져있는데 충돌상태가 아닌 경우엔 토글을 꺼야함
+        {
+            toggle.isOn = false;
         }
     }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        isCollision = true;
+        isNotCheckState = true;
+    }
+    void OnTriggerExit2D(Collider2D other)
+    {
+        Destroy(other.gameObject); // 노트 파괴
+        ComboEffect.Instance.GetJudgement(state);
+        ComboText.Instance.GetNoteExactly();
+        isCollision = false;
+        isNotCheckState= false;
+    }
+    void OnTriggerStay2D(Collider2D other) 
+    {
+
+        if(toggle.isOn) //라인을 클릭했는데 노트와 충돌 중인 경우 진입 
+        {
+            noteTiming = other.gameObject.GetComponent<Note>().willPlayTiming;
+        
+            if(other.gameObject.layer == LayerMask.NameToLayer("Note")) // 노트와 라인이 충돌 중엔 프레임 단위로 반복  
+            {  
+                now = HighSpeed.Instance.CurrentTime; // 클릭한 시간
+                if(noteTiming - 0.35 <= now && now <= noteTiming + 0.35) state = 0; // perfect
+                else if(noteTiming - 0.7 <= now && now <= noteTiming + 0.7) state = 1; // good
+                else if(noteTiming - 1 <= now && now <= noteTiming + 1) state = 2; // bad
+            }
+
+            else if(other.gameObject.layer == LayerMask.NameToLayer("LongNote")) // 롱노트와 라인임 충돌 중엔 프레임 단위로 반복
+            {
+                now = HighSpeed.Instance.CurrentTime; // 클릭한 시간
+                if(isNotCheckState) // state 판정
+                {
+                    if(noteTiming - 0.35 <= now && now <= noteTiming + 0.35) state = 0; // perfect
+                    else if(noteTiming - 0.7 <= now && now <= noteTiming + 0.7) state = 1; // good
+                    else if(noteTiming - 1 <= now && now <= noteTiming + 1) state = 2; // bad
+                    isNotCheckState = false;
+                }
+                else
+                {
+                    ComboEffect.Instance.GetJudgement(state);
+                    ComboText.Instance.GetNoteExactly();
+                }
+            }
+    
+        }
+    
+    }
+    
 }

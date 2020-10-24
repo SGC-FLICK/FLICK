@@ -18,7 +18,7 @@
           <e p="line.cs" t="Include" />
           <e p="Note.cs" t="Include" />
           <e p="NoteGenerator.cs" t="Include" />
-          <e p="pointer.cs" t="Include" />
+          <e p="PointerMgr.cs" t="Include" />
           <e p="ReadCSV.cs" t="Include" />
         </e>
       </e>
