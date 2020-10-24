@@ -25,10 +25,8 @@ public class line : MonoBehaviour
         {
             if (note.isStateChecked == false)
             {
-                note.scoreType = Note.ScoreType.MISS;
-                ScoreProcess(note);    // 점수 처리
                 ComboText.Instance.GetMiss();
-                note.Eliminate();      //노트 파괴
+                Judge(note, Note.ScoreType.MISS);
             }
         }
 
@@ -36,11 +34,9 @@ public class line : MonoBehaviour
         {
             if (note.isStateChecked == false)
             {
-                note.scoreType = Note.ScoreType.MISS;
-                ScoreProcess(note);    // 점수 처리
                 ComboText.Instance.GetMiss();
                 isLongNote = false;    // LongNote 탈출 시 처리
-                note.Eliminate();      // 노트 파괴
+                Judge(note, Note.ScoreType.MISS);
             }
         }
     }
@@ -61,6 +57,7 @@ public class line : MonoBehaviour
     void OnTriggerStay2D(Collider2D other) 
     {
         Note note = other.gameObject.GetComponent<Note>();
+
         if (isOn) //라인을 클릭했는데 노트와 충돌 중인 경우 진입 
         {
             var noteTiming = note.willPlayTiming;
@@ -72,29 +69,32 @@ public class line : MonoBehaviour
                 if (noteTiming - 0.05 <= now && now <= noteTiming + 0.05) // perfect
                 {
                     Debug.Log("노트 타이밍 : " + noteTiming + "노래 : " + now);
-                    note.scoreType = Note.ScoreType.PERFECT;
-                    ScoreProcess(note);
-                    note.Eliminate();
+                    Judge(note, Note.ScoreType.PERFECT);
                 }
                 else if (noteTiming - 0.1 <= now && now <= noteTiming + 0.1) // good
                 {
-                    note.scoreType = Note.ScoreType.GOOD;
-                    ScoreProcess(note);
-                    note.Eliminate();
+                    Judge(note, Note.ScoreType.BAD);
                 }
                 else if (noteTiming - 0.2 <= now && now <= noteTiming + 0.2)    // bad
                 {
-                    if (note != null)
-                    {
-                        EventManager.instance.Raise(new NoteDecisionEvent(note));
-                    }
-                    note.scoreType = Note.ScoreType.BAD;
-                    ScoreProcess(note);
-                    note.Eliminate();
+                    Judge(note, Note.ScoreType.BAD);
                 }
-
             }
         }
     }
     
+    void Judge(Note note, Note.ScoreType scoreType)
+    {
+        if (note == null)
+        {
+            Debug.LogError("Note is null");
+        }
+
+        note.scoreType = scoreType;
+        ScoreProcess(note);
+
+        EventManager.instance.Raise(new NoteDecisionEvent(note));
+
+        note.Eliminate();
+    }
 }
