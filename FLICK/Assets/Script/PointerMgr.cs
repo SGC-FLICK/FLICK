@@ -20,58 +20,44 @@ public class PointerMgr : MonoBehaviour
     {
         MouseStateCheck();
     }
+
     public void MouseStateCheck()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0)) //마우스를 누르는 동안
         {
-            isMouseDown = true;
-            isDragged = false;
+            MousePushing();
         }
-        if (isDragged) isMouseDown = false;
-
-        if (Input.GetMouseButtonUp(0)) // 마우스를 뗀 경우
+        if (Input.GetMouseButtonUp(0)) //마우스를 때면
         {
-            if (isMouseDown)
-            {
-                MouseClicked();
-                isMouseDown = false;
-            }
-            isDragged = false;
-        }
-        else // 마우스를 누르고 있는 경우
-        {
-            if(isMouseDown)
-            {
-                MousePushing();
-            }
+            MouseUp();
         }
     }
 
     public void MousePushing()
     {
-        RaycastHit2D hit2D = Physics2D.Raycast(
-                Camera.main.ScreenPointToRay(Input.mousePosition).origin,
-                Camera.main.ScreenPointToRay(Input.mousePosition).direction,
-                Mathf.Infinity,
-                LayerMask.GetMask("Line"));
-
-        if (hit2D.collider != null) //라인이 클릭되면
-         { 
-             hit2D.collider.gameObject.GetComponent<Toggle>().isOn = true; // 라인에 노트가 들어왔는 지 검사하는 단계로 진입
-         }
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Debug.DrawRay(ray.origin, ray.direction * 30, Color.blue, 3.5f);
+        RaycastHit2D hit = Physics2D.Raycast(ray.origin, Vector3.zero);
+        if (hit)
+        {
+            if (hit.transform.gameObject.tag == "Tile")
+            {
+                hit.transform.GetComponent<line>().isOn = true;
+            }
+        }
     }
     
-    public void MouseClicked()
+    public void MouseUp()
     {
-        RaycastHit2D hit2D = Physics2D.Raycast(
-                Camera.main.ScreenPointToRay(Input.mousePosition).origin,
-                Camera.main.ScreenPointToRay(Input.mousePosition).direction,
-                Mathf.Infinity,
-                LayerMask.GetMask("Line"));
-        // target 클릭 시 hit2D에 담김
-         if (hit2D.collider != null) 
-         { 
-             hit2D.collider.gameObject.GetComponent<Toggle>().isOn = false;
-         }
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Debug.DrawRay(ray.origin, ray.direction * 10, Color.blue, 3.5f);
+        RaycastHit2D hit = Physics2D.Raycast(ray.origin, Vector3.zero);
+        if (hit)
+        {
+            if (hit.transform.gameObject.tag == "Tile")
+            {
+                hit.transform.GetComponent<line>().isOn = false;
+            }
+        }
     }
 }

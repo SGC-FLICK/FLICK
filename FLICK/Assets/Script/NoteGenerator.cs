@@ -69,6 +69,7 @@ public class NoteGenerator : MonoBehaviour
         spawnedPrefab = Instantiate(notePrefab, spawnPoint[rand].transform);
         spawnedPrefab.GetComponent<Note>().spawnedTiming = musicPlayedTime;
         spawnedPrefab.GetComponent<Note>().willPlayTiming = musicPlayedTime + arriveSpentTime;
+        spawnedPrefab.GetComponent<Note>().noteType = Note.NoteType.NORMAL; //기본노트
         //spawnedTiming, willPlayTiming은 note 프리팹에 저장되는 변수
         //spawnedTiming은 음악 몇초 째에 생성되었는지, willPlayTiming은 몇초 째에 연주되어야 하는지를 의미
         //arriveSpentTime은 생성 후 라인까지 걸리는 시간, 
