@@ -20,14 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51f05284-b91e-4567-b445-aef8b718b7e3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FLICK/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FLICK/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FLICK/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FLICK/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Develope-KimSM/SongProgress.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Develope-KimSM/SongProgress.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Note.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Note.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Develope-KimSM/ComboText.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Develope-KimSM/ComboText.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/TEST.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TEST.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/UITest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/UITest.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/line.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/line.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/pointer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/pointer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +36,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Develope-KimSM/ComboEffect.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Develope-KimSM/ComboText.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Develope-KimSM/HighSpeed.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Develope-KimSM/SongProgress.cs" root0="FORCE_HIGHLIGHTING" />
@@ -50,6 +49,8 @@
         <option value="$PROJECT_DIR$/Assets/Develope-KimSM/NoteTemp.cs" />
         <option value="$PROJECT_DIR$/Assets/Script/Note.cs" />
         <option value="$PROJECT_DIR$/Assets/Develope-KimSM/SongProgress.cs" />
+        <option value="$PROJECT_DIR$/Assets/Develope-KimSM/ComboEffect.cs" />
+        <option value="$PROJECT_DIR$/Assets/Script/line.cs" />
         <option value="$PROJECT_DIR$/Assets/Develope-KimSM/ComboText.cs" />
       </list>
     </option>
@@ -77,7 +78,7 @@
       <workItem from="1603461574393" duration="2219000" />
       <workItem from="1603466404415" duration="1853000" />
       <workItem from="1603469683958" duration="1062000" />
-      <workItem from="1603471246778" duration="4316000" />
+      <workItem from="1603471246778" duration="8533000" />
     </task>
     <servers />
   </component>

@@ -28,7 +28,7 @@ public class line : MonoBehaviour
             //
             
             if(toggle.isOn) //라인이 클릭되어있는 상태에서 충돌 중인 경우 
-             {
+            {
                 now = HighSpeed.Instance.CurrentTime; //파괴된 시간을 기록해서 now에 저장
                 toggle.isOn = false; 
                 Destroy(other.gameObject); // 노트 파괴
@@ -37,19 +37,23 @@ public class line : MonoBehaviour
                 if(noteTiming - 0.35 <= now && now <= noteTiming + 0.35) //노트 타이밍 +- 0.04이면 퍼펙트
                 {
                     Debug.Log("perfect!");
+                    ComboEffect.Instance.GetJudgement(0);
                 } 
                 else if(noteTiming - 0.6 <= now && now <= noteTiming + 0.6)
                 {
                     Debug.Log("good!");
+                    ComboEffect.Instance.GetJudgement(1);
                 }
                 else //bad만 나옴 생각보다 now와 noteTiming의 차이가 큼
                 {
                     Debug.Log(noteTiming);
                     Debug.Log(now);
                     Debug.Log("bad!");
+                    ComboEffect.Instance.GetJudgement(2);
                 }
+                ComboText.Instance.GetNoteExactly();
                 // queue[0]처리하기
-             }
+            }
         }
     }
 
@@ -58,6 +62,8 @@ public class line : MonoBehaviour
         if(other.gameObject.layer == LayerMask.NameToLayer("Note"))
         {
             Debug.Log("miss");
+            ComboEffect.Instance.GetJudgement(3);
+            ComboText.Instance.GetMiss();
         }
     } 
 }
