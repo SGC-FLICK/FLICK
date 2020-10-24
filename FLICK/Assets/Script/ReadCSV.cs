@@ -6,28 +6,33 @@ using System;
 
 public class ReadCSV : MonoBehaviour
 {
-    public int bpm;     //BPM
-    public double beat; //1박
-    //Faded는 96, Titanium은 188
-    public double CountperSec; //1분 BPM을 채우기 위해 1초에 카운트
-    string CSVdir;
-    bool flag = false; //Title_t를 마주쳤는지
+    public Song currentSong;
+    public int bpm;                           //BPM
+    public double beat;                       //1박
+    public double CountperSec;                //1분 BPM을 채우기 위해 1초에 카운트
+    public float musicStartDelay;             //첫 음악 시작까지 딜레이
+    public float noteStartDelay;              //첫 노트 생성까지 딜레이
 
-    //public Queue <NoteQueue>[] note = new Queue<NoteQueue>[6];
-    public Queue note = new Queue();
+    public Queue<NoteQueue> note = new Queue<NoteQueue>();
+    //public Queue note = new Queue();
 
     void Start()
     {
-        //for (int i = 0; i < 6; i++)
-        //{
-        //    note[i] = new Queue<NoteQueue>();
-        //}
+        Init();
         ReadCSVFile();
+    }
+
+    void Init()
+    {
+        bpm = currentSong.bpm;
+        beat = currentSong.beat;
+        musicStartDelay = currentSong.musicStartDelay;
+        noteStartDelay = currentSong.noteStartDelay;
     }
 
     void ReadCSVFile()
     {
-        CSVdir = (Application.dataPath + "/CSVFiles/Faded.csv").Replace("/", "\\");
+        var CSVdir = (Application.dataPath + "/CSVFiles/" + currentSong.MusicName + ".csv").Replace("/", "\\");
         //상대경로 지정
         StreamReader strReader = new StreamReader(CSVdir);
         bool endOfFile = false;
@@ -57,11 +62,11 @@ public class ReadCSV : MonoBehaviour
             {
                 currentTitle = data_values[3].ToString();
             }
-            if (data_values[2] == " Note_on_c")
+            if (data_values[2] == " Note_on_c" && data_values[5] != " 0")
             {
                 int data_values_toInt;
                 data_values_toInt = Convert.ToInt32(data_values[1]);
-                note.Enqueue(data_values_toInt);
+                note.Enqueue(CreateNoteData(data_values_toInt, 0, Note.NoteType.NORMAL));
             }
             //if (currentTitle == " \"track_1\"" && data_values[2] == " Note_on_c")
             //{
@@ -90,23 +95,25 @@ public class ReadCSV : MonoBehaviour
         CountperSec = bpm * beat / 60;
     }
 
-    NoteQueue CreateNoteData(int spawnTime, int track)
+    NoteQueue CreateNoteData(int startTime, int endTime, Note.NoteType noteType)
     {
         NoteQueue notedata;
-        notedata = new NoteQueue(spawnTime, track);
+        notedata = new NoteQueue(startTime, endTime, noteType);
         return notedata;
     }
 
     public struct NoteQueue
     {
-        public int spawnTime;
-        //몇번째 count 시간에 등장하는지
-        public int trackData;
-        //몇 번째 트랙인지
-        public NoteQueue(int _spawnTime, int _track)
+        public int startTime;
+        public int endTime;
+        public Note.NoteType noteType;
+
+        public NoteQueue(int _startTime, int _endTime, Note.NoteType _noteType)
         {
-            spawnTime = _spawnTime;
-            trackData = _track;
+            startTime = _startTime;
+            endTime = _endTime;
+            noteType = _noteType;
         }
     }
+
 }

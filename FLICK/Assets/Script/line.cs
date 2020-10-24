@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class line : MonoBehaviour
+public class Line : MonoBehaviour
 {
     private double now = 0;
 
@@ -69,6 +70,7 @@ public class line : MonoBehaviour
                 if (noteTiming - 0.05 <= now && now <= noteTiming + 0.05) // perfect
                 {
                     Debug.Log("노트 타이밍 : " + noteTiming + "노래 : " + now);
+                    //Debug.Log("노트 타이밍 : " + noteTiming + "노래 : " + now);
                     Judge(note, Note.ScoreType.PERFECT);
                 }
                 else if (noteTiming - 0.1 <= now && now <= noteTiming + 0.1) // good
